@@ -3,20 +3,34 @@
 buildscript {
     ext {
         buildToolsVersion = "28.0.3"
-        minSdkVersion = 16
+        minSdkVersion = 18
         compileSdkVersion = 28
         targetSdkVersion = 28
+        supportLibVersion = "28.0.0"
     }
     repositories {
         google()
         jcenter()
+        // https://github.com/Polidea/react-native-ble-plx/issues/628#issuecomment-607473957
+        maven {
+          url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.2")
+        // https://github.com/Polidea/react-native-ble-plx/issues/628#issuecomment-607473957
+        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'gradle.plugin.org.codehaus.groovy:groovy-android-gradle-plugin:3.0.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+// https://github.com/Polidea/react-native-ble-plx/issues/628#issuecomment-607473957
+apply plugin: 'com.android.library'
+apply plugin: "org.codehaus.groovy.android"
+android {
+    compileSdkVersion 28
 }
 
 allprojects {
